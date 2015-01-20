@@ -11,17 +11,28 @@
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/JSXTransformer.js'></script>
 	<script type= 'text/jsx'>
 		var APP = React.createClass({
+			getDefaultProps: function(){
+				return {
+					txt: 'asdf',
+					cat: 0
+				}
+			},
+			propTypes: {
+					txt: React.PropTypes.string,
+					cat: React.PropTypes.number.isRequired
+				},
 			render: function(){
+				
 				return (
 					<div>
-						<h1>Hello World</h1>
+						<h1> {this.props.txt} </h1>
 						<b>bold</b>
 					</div>
 					);
 			}
 		});
 
-		React.renderComponent(<APP />, document.body);
+		React.render(<APP cat={5} />, document.body);
 	</script>
 </body>
 </html>

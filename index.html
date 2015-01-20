@@ -3,10 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>React Example</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 </head>
 <body>
 	<div id="app"></div>
-	<div id="dom"></div>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react.js'></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/JSXTransformer.js'></script>
 	<script type= 'text/jsx'>
@@ -29,16 +29,6 @@
 			}
 		});
 
-		var MessageBoxDOM = React.createClass({
-			render: function () {
-				return React.DOM.div(
-				{className: 'container'},
-					React.DOM.h1(null, 'Hello, World'),
-					SubMessage(null)
-				)
-			}
-		});
-
 		React.renderComponent(
 			<MessageBox />,
 			document.getElementById('app'),
@@ -46,11 +36,6 @@
 				console.log('alala');
 			}
 		);
-
-		var reactComponentDOM = React.renderComponent(
-			MessageBoxDOM(null),
-			document.getElementById('dom')
-			)
 	</script>
 </body>
 </html>

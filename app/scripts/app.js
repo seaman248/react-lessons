@@ -1,45 +1,66 @@
 /** @jsx React.DOM */
+var React = require('react');
+var converter = new Showdown.converter();
 
-var React = window.React = require('react'),
-    Timer = require("./ui/Timer"),
-    mountNode = document.getElementById("app");
+var data = [
+  {author: "Pete Hunt", text: "This is one comment"},
+  {author: "Jordan Walke", text: "This is *another* comment"}
+];
 
-var TodoList = React.createClass({
-  render: function() {
-    var createItem = function(itemText) {
-      return <li>{itemText}</li>;
-    };
-    return <ul>{this.props.items.map(createItem)}</ul>;
-  }
+var Comment = React.createClass({
+	render: function(){
+		var rawMarkup = converter.makeHtml(this.props.children.toString());
+		return (
+				<div className="comment">
+					<h2 className="commentAuthor">
+						{this.props.author}
+					</h2>
+					<span dangerouslySetInnerHTML={{__html: rawMarkup}} />
+				</div>
+			);
+	}
 });
-var TodoApp = React.createClass({
-  getInitialState: function() {
-    return {items: [], text: ''};
-  },
-  onChange: function(e) {
-    this.setState({text: e.target.value});
-  },
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var nextItems = this.state.items.concat([this.state.text]);
-    var nextText = '';
-    this.setState({items: nextItems, text: nextText});
-  },
+
+var CommentList = React.createClass({
+	render: function(){
+		var commentNodes = this.props.data.map(function(comment){
+			return (
+				<Comment author={comment.author}>
+					{comment.text}
+				</Comment>
+				);
+		})
+		return (
+				<div className="commentList">
+					{commentNodes}
+				</div>
+			)
+	}
+})
+
+var CommentForm = React.createClass({
   render: function() {
     return (
-      <div>
-        <h3>TODO</h3>
-        <TodoList items={this.state.items} />
-        <form onSubmit={this.handleSubmit}>
-          <input onChange={this.onChange} value={this.state.text} />
-          <button>{'Add #' + (this.state.items.length + 1)}</button>
-        </form>
-        <Timer />
+      <div className="commentForm">
+        Hello, world! I am a CommentForm.
       </div>
     );
   }
 });
 
+var CommentBox = React.createClass({
+		render: function () {
+				return (
+						<div className="commentBox">
+							<h1>Comments</h1>
+							<CommentList data={this.props.data}/>
+							<CommentForm />
+						</div>
+				);
+		}
+});
 
-React.renderComponent(<TodoApp />, mountNode);
-
+React.render (
+		<CommentBox data={data} />,
+		document.getElementById('app')
+	);

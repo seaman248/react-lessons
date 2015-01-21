@@ -55,10 +55,6 @@ gulp.task('scripts', function () {
 
 });
 
-
-
-
-
 // HTML
 gulp.task('html', function () {
     return gulp.src('app/*.html')

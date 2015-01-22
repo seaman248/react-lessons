@@ -14,7 +14,7 @@ var ProductCategoryRow = React.createClass({
   render: function(){
     return (<tr><th colSpan="2">{this.props.category}</th></tr>);
   }
-})
+});
 
 var ProductRow = React.createClass({
   render: function(){
@@ -30,7 +30,8 @@ var ProductRow = React.createClass({
       </tr>
       );
   }
-})
+});
+
 var ProductTable = React.createClass({
   render: function(){
     var rows = [];
@@ -69,7 +70,7 @@ var SearchBar = React.createClass({
       </form>
       )
   }
-})
+});
 
 var FilterableProductTable = React.createClass({
   render: function(){
@@ -79,4 +80,6 @@ var FilterableProductTable = React.createClass({
         <ProductTable products={this.props.products} />
       )
   }
-})
+});
+
+React.render(<FilterableProductTable products={PRODUCTS} />, document.getElementById="app");

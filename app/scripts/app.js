@@ -33,28 +33,29 @@ var ProductRow = React.createClass({
 });
 
 var ProductTable = React.createClass({
-  render: function(){
-    var rows = [];
-    var lastCategory = null;
-    this.props.products.forEach(function(){
-      if (product.category !== lastCategory){
-        rows.push(<ProductCategoryRow category={product.category} key={product.category} />);
-      }
-      rows.push(<ProductRow product={product} key={product.name} />);
-      lastCategory = product.category;
-    });
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-               <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-        </table>
-      );
-  }
+    render: function() {
+        var rows = [];
+        var lastCategory = null;
+        this.props.products.forEach(function(product) {
+            if (product.category !== lastCategory) {
+                rows.push(<ProductCategoryRow category={product.category} key={product.category} />);
+            }
+            rows.push(<ProductRow product={product} key={product.name} />);
+            lastCategory = product.category;
+            
+        });
+        return (
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>{rows}</tbody>
+            </table>
+        );
+    }
 });
 
 var SearchBar = React.createClass({
@@ -78,8 +79,9 @@ var FilterableProductTable = React.createClass({
       <div>
         <SearchBar />
         <ProductTable products={this.props.products} />
-      )
+      </div>
+      );
   }
 });
 
-React.render(<FilterableProductTable products={PRODUCTS} />, document.getElementById="app");
+React.render(<FilterableProductTable products={PRODUCTS} />, document.getElementById('app'));
